@@ -31,6 +31,7 @@ public:
 
 protected:
 
+    //TODO Move functionality of wire to Wire class.
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);

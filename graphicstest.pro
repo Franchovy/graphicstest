@@ -28,12 +28,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     myitem.cpp \
-    effect.cpp
+    effect.cpp \
+    wire.cpp
 
 HEADERS += \
         mainwindow.h \
     myitem.h \
-    effect.h
+    effect.h \
+    wire.h
 
 FORMS += \
         mainwindow.ui
