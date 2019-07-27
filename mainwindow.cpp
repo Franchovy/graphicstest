@@ -10,13 +10,17 @@ MainWindow::MainWindow(QWidget *parent) :
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
 
-    newEffect = new Effect();
-    scene->addItem(newEffect);
     /*
     // create our object and add it to the scene
     item = new MyItem();
     scene->addItem(item);
     */
+    newEffect = new Effect();
+    scene->addItem(newEffect);
+
+
+    // Why is this needed? lol. But it solves the display issue
+    ui->graphicsView->show();
 }
 
 MainWindow::~MainWindow()

@@ -1,7 +1,9 @@
 #include "effect.h"
 
+#include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 #include <QPen>
+#include <QDebug>
 
 Effect::Effect()
 {
@@ -26,10 +28,38 @@ void Effect::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     painter->setPen(pen);
     painter->drawRect(rect);
 
-    //painter->setPen(inPen);
+    // Changing pen either seems to not work or completely crash the app. Figure this out!
     painter->drawRect(inputSlot);
-    //QPen outPen(Qt::blue, 3);
-    //painter->setPen(outPen);
     painter->drawRect(outputSlot);
 
+    if (activeLine != nullptr){
+        painter->drawLine(*activeLine);
+    }
 }
+
+void Effect::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (inputSlot.contains(event->pos())){
+        qDebug() << "Start line draw";
+        activeLine = new QLineF(inputSlot.center(),event->pos());
+        drawing = true;
+    } else {
+        event->ignore();
+    }
+}
+
+void Effect::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (drawing){
+        activeLine->setP2(event->pos());
+        qDebug() << "Drawing Line to point: " << activeLine->p2();
+        update();
+    }
+}
+
+void Effect::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    drawing = false;
+    activeLine = nullptr; //CHANGEME no garbage disposal.
+}
+
