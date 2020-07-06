@@ -8,7 +8,7 @@
 class Wire : public QGraphicsItem
 {
 public:
-    Wire();
+    Wire() = default;
 
     //TODO Static elements of Wire class, like the effect chain.
 
